@@ -94,7 +94,7 @@ const oidc = new Provider('http://localhost:3000', {
 });
 ```
 
-**Aggregated and Distributed claims**  
+**Aggregated and Distributed claims**
 Returning aggregated and distributed claims is as easy as having your Account#claims method return
 the two necessary members `_claim_sources` and `_claim_names` with the
 [expected][aggregated-distributed-claims] properties. oidc-provider will include only the
@@ -117,7 +117,7 @@ Clients can be passed to your provider instance during the `initialize` call or 
 via your provided Adapter. oidc-provider will use the adapter's `find` method when a non-cached
 client_id is encountered. If you only wish to support clients that are initialized and no dynamic
 registration then make it so that your adapter resolves client find calls with a falsy value. (e.g.
-`return Promise.resolve()`).  
+`return Promise.resolve()`).
 
 Available [Client Metadata][client-metadata] is validated as defined by the specifications. This list
 is extended by other adjacent-specification related properties such as introspection and revocation
@@ -127,7 +127,7 @@ Note: each oidc-provider caches the clients once they are loaded. When your adap
 configuration changes you should either reload your processes or trigger a cache clear
 (`provider.Client.cacheClear()` or `provider.Client.cacheClear(id)`).
 
-**via Provider interface**  
+**via Provider interface**
 To add pre-established clients use the `initialize` method on a oidc-provider instance. This accepts
 a clients array with metadata objects and rejects when the client metadata would be invalid.
 
@@ -149,7 +149,7 @@ const clients = [
 oidc.initialize({ clients }).then(fulfillmentHandler, rejectionHandler);
 ```
 
-**via Adapter**  
+**via Adapter**
 Storing client metadata in your storage is recommended for distributed deployments. Also when you
 want to provide a client configuration GUI or plan on changing this data often. Clients get loaded
 *! and validated !* when they are first needed, any metadata validation error encountered during
@@ -380,7 +380,7 @@ deployment compact. The feature flags with their default values are
 | sessionManagement | no |
 | pkce | yes |
 
-**Development quick-start interactions**  
+**Development quick-start interactions**
 Development-ONLY out of the box interaction views bundled with the library allow you to skip the
 boring frontend part while experimenting with oidc-provider. Enter any username (will be used as sub
 claim value) and any password to proceed.
@@ -393,7 +393,7 @@ const configuration = { features: { devInteractions: Boolean[true] } };
 ```
 
 
-**Discovery**  
+**Discovery**
 Exposes `/.well-known/webfinger` and `/.well-known/openid-configuration` endpoints. Contents of the
 latter reflect your actual configuration, i.e. available claims, features and so on.
 ```js
@@ -402,23 +402,23 @@ const configuration = { features: { discovery: Boolean[true] } };
 WebFinger always returns positive results and links to this issuer, it is not resolving the resources
 in any way.
 
-**Authorization `claims` parameter**  
+**Authorization `claims` parameter**
 Enables the use and validations of `claims` parameter as described in [Core 1.0][core-claims-url]
 and sets the discovery endpoint property `claims_parameter_supported` to true.
 ```js
 const configuration = { features: { claimsParameter: Boolean[false] } };
 ```
 
-**Token endpoint `client_credentials` grant**  
+**Token endpoint `client_credentials` grant**
 Enables `grant_type=client_credentials` to be used on the token endpoint. Note: client still has to
-be allowed this grant.  
+be allowed this grant.
 Hint: allowing this grant together with token introspection and revocation is an easy and elegant
 way to allow authorized access to some less sensitive backend actions.
 ```js
 const configuration = { features: { clientCredentials: Boolean[false] } };
 ```
 
-**Encryption features**  
+**Encryption features**
 Enables clients to receive encrypted userinfo responses, encrypted ID Tokens and to send encrypted
 request parameters to authorization.
 ```js
@@ -426,15 +426,15 @@ const configuration = { features: { encryption: Boolean[false] } };
 ```
 
 
-**Offline access - Refresh Tokens**  
+**Offline access - Refresh Tokens**
 The use of Refresh Tokens (offline access) as described in [Core 1.0 Offline Access][core-offline-access]
 does not require any feature flag as Refresh Tokens will be issued by the authorization_code grant
 automatically in case the authentication request included offline_access scope and consent prompt and
 the client in question has the refresh_token grant configured.
 
-**Refresh Tokens beyond the spec scope**  
-  > The use of Refresh Tokens is not exclusive to the offline_access use case. The Authorization
-  > Server MAY grant Refresh Tokens in other contexts that are beyond the scope of this specification.
+**Refresh Tokens beyond the spec scope**
+> The use of Refresh Tokens is not exclusive to the offline_access use case. The Authorization
+> Server MAY grant Refresh Tokens in other contexts that are beyond the scope of this specification.
 
 Provide `alwaysIssueRefresh` feature flag to have your provider instance issue Refresh Tokens even
 if offline_access scope is not requested. The client still has to have refresh_token grant
@@ -445,7 +445,7 @@ const configuration = { features: { alwaysIssueRefresh: Boolean[false] } };
 ```
 
 
-**Authorization `request` parameter**  
+**Authorization `request` parameter**
 Enables the use and validations of `request` parameter as described in
 [Core 1.0][core-jwt-parameters-url] and sets the discovery endpoint property
 `request_parameter_supported` to true.
@@ -455,7 +455,7 @@ const configuration = { features: { request: Boolean[false] } };
 ```
 
 
-**Authorization `request_uri` parameter**  
+**Authorization `request_uri` parameter**
 Enables the use and validations of `request_uri` parameter as described in
 [Core 1.0][core-jwt-parameters-url] and sets the discovery endpoint property
 `request_uri_parameter_supported` and `require_request_uri_registration` to true.
@@ -468,7 +468,7 @@ To disable require_request_uri_registration configure requestUri as an object li
 const configuration = { features: { requestUri: { requireRequestUriRegistration: false } } };
 ```
 
-**Introspection endpoint**  
+**Introspection endpoint**
 Enables the use of Introspection endpoint as described in [RFC7662][introspection] for
 tokens of type AccessToken, ClientCredentials and RefreshToken. When enabled the
 introspection_endpoint property of the discovery endpoint is published, otherwise the property
@@ -485,7 +485,7 @@ use. This client should be unusable for standard authorization flow, to set up s
 grant_types, response_types and redirect_uris as empty arrays.
 
 
-**Revocation endpoint**  
+**Revocation endpoint**
 Enables the use of Revocation endpoint as described in [RFC7009][revocation] for tokens of
 type AccessToken, ClientCredentials and RefreshToken. When enabled the
 revocation_endpoint property of the discovery endpoint is published, otherwise the property
@@ -506,7 +506,7 @@ const configuration = { features: { oauthNativeApps: Boolean[true] } };
 ```
 
 
-**Session management features**  
+**Session management features**
 Enables features described in [Session Management 1.0 - draft 28][session-management].
 ```js
 const configuration = { features: { sessionManagement: Boolean[false] } };
@@ -519,21 +519,21 @@ const configuration = { features: { sessionManagement: { keepHeaders: true } } }
 ```
 
 
-**Back-Channel Logout features**  
+**Back-Channel Logout features**
 Enables features described in [Back-Channel Logout 1.0 - draft 04][backchannel-logout].
 ```js
 const configuration = { features: { sessionManagement: true, backchannelLogout: Boolean[false] } };
 ```
 
 
-**Front-Channel Logout features**  
+**Front-Channel Logout features**
 Enables features described in [Front-Channel Logout 1.0 - draft 02][frontchannel-logout].
 ```js
 const configuration = { features: { sessionManagement: true, frontchannelLogout: Boolean[false] } };
 ```
 
 
-**Dynamic registration features**  
+**Dynamic registration features**
 Enables features described in [Dynamic Client Registration 1.0][registration].
 ```js
 const configuration = { features: { registration: Boolean[false] } };
@@ -564,7 +564,7 @@ const configuration = { features: { registration: { initialAccessToken: true } }
 new (provider.InitialAccessToken)({}).save().then(console.log);
 ```
 
-**Dynamic registration management features**  
+**Dynamic registration management features**
 Enables Update and Delete features described in
 [OAuth 2.0 Dynamic Client Registration Management Protocol][registration-management].
 ```js
@@ -577,7 +577,7 @@ configure registrationManagement as an object like so:
 const configuration = { features: { ..., registrationManagement: { rotateRegistrationAccessToken: true } } };
 ```
 
-**PKCE**  
+**PKCE**
 Enables [RFC7636 - Proof Key for Code Exchange by OAuth Public Clients][pkce]
 ```js
 const configuration = { features: { pkce: Boolean[true] } };
@@ -764,7 +764,7 @@ provider.use(async (ctx, next) => {
   console.log('middleware post', ctx.method, ctx._matchedRouteName);
   // post-processing
   // since internal route matching was already executed you may target a specific action here
-  // checking `ctx._matchedRouteName`, the unique route names used are "authorization", "token",  
+  // checking `ctx._matchedRouteName`, the unique route names used are "authorization", "token",
   // "discovery", "registration", "userinfo", "resume", "certificates", "webfinger",
   // "client", "client_update", "client_delete", "introspection", "revocation",
   // "check_session" and "end_session". ctx.method === 'OPTIONS' is then useful for filtering out
