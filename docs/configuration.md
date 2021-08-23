@@ -921,7 +921,12 @@ recommendation: set cookies.keys and cookies.long.signed = true
 
 default value:
 ```js
-{ signed: undefined, httpOnly: true, maxAge: 31557600000 }
+{
+  signed: undefined,
+  httpOnly: true,
+  maxAge: 31557600000,
+  samesite: 'none'
+}
 ```
 
 ### cookies.names
@@ -932,10 +937,12 @@ affects: User-Agent session, Session Management states and interaction cookie na
 
 default value:
 ```js
-{ session: '_session',
+{
+  session: '_session',
   interaction: '_grant',
   resume: '_grant',
-  state: '_state' }
+  state: '_state'
+}
 ```
 
 ### cookies.short
@@ -947,7 +954,12 @@ recommendation: set cookies.keys and cookies.short.signed = true
 
 default value:
 ```js
-{ signed: undefined, httpOnly: true, maxAge: 3600000 }
+{
+  signed: undefined,
+  httpOnly: true,
+  maxAge: 3600000,
+  samesite: 'none'
+}
 ```
 
 ### discovery
@@ -958,13 +970,15 @@ affects: discovery
 
 default value:
 ```js
-{ claim_types_supported: [ 'normal' ],
+{
+  claim_types_supported: [ 'normal' ],
   claims_locales_supported: undefined,
   display_values_supported: undefined,
   op_policy_uri: undefined,
   op_tos_uri: undefined,
   service_documentation: undefined,
-  ui_locales_supported: undefined }
+  ui_locales_supported: undefined
+}
 ```
 
 ### extraClientMetadata
@@ -1017,7 +1031,8 @@ Enable/disable features, see configuration.md for more details
 
 default value:
 ```js
-{ devInteractions: true,
+{
+  devInteractions: true,
   discovery: true,
   requestUri: true,
   oauthNativeApps: true,
@@ -1033,7 +1048,8 @@ default value:
   registrationManagement: false,
   request: false,
   revocation: false,
-  sessionManagement: false }
+  sessionManagement: false
+}
 ```
 
 ### findById
@@ -1157,11 +1173,13 @@ affects: discovery, client authentication for introspection, registration and re
 
 default value:
 ```js
-[ 'none',
+[
+  'none',
   'client_secret_basic',
   'client_secret_jwt',
   'client_secret_post',
-  'private_key_jwt' ]
+  'private_key_jwt'
+]
 ```
 
 ### logoutSource
@@ -1274,13 +1292,15 @@ affects: authorization, discovery, registration, registration management
 
 default value:
 ```js
-[ 'code id_token token',
+[
+  'code id_token token',
   'code id_token',
   'code token',
   'code',
   'id_token token',
   'id_token',
-  'none' ]
+  'none'
+]
 ```
 
 ### revocationEndpointAuthMethods
@@ -1291,11 +1311,13 @@ affects: discovery, client authentication for revocation, registration and regis
 
 default value:
 ```js
-[ 'none',
+[
+  'none',
   'client_secret_basic',
   'client_secret_jwt',
   'client_secret_post',
-  'private_key_jwt' ]
+  'private_key_jwt'
+]
 ```
 
 ### routes
@@ -1306,7 +1328,8 @@ affects: routing
 
 default value:
 ```js
-{ authorization: '/auth',
+{
+  authorization: '/auth',
   certificates: '/certs',
   check_session: '/session/check',
   end_session: '/session/end',
@@ -1314,7 +1337,8 @@ default value:
   registration: '/reg',
   revocation: '/token/revocation',
   token: '/token',
-  userinfo: '/me' }
+  userinfo: '/me'
+}
 ```
 
 ### scopes
@@ -1347,11 +1371,13 @@ affects: discovery, client authentication for token endpoint, registration and r
 
 default value:
 ```js
-[ 'none',
+[
+  'none',
   'client_secret_basic',
   'client_secret_jwt',
   'client_secret_post',
-  'private_key_jwt' ]
+  'private_key_jwt'
+]
 ```
 
 ### ttl
@@ -1362,11 +1388,13 @@ affects: tokens
 
 default value:
 ```js
-{ AccessToken: 3600,
+{
+  AccessToken: 3600,
   AuthorizationCode: 600,
   ClientCredentials: 600,
   IdToken: 3600,
-  RefreshToken: 1209600 }
+  RefreshToken: 1209600
+}
 ```
 
 ### uniqueness
@@ -1393,7 +1421,8 @@ affects: signing, encryption, discovery, client validation
 
 default value:
 ```js
-{ idTokenEncryptionAlgValues: [],
+{
+  idTokenEncryptionAlgValues: [],
   idTokenEncryptionEncValues: [],
   idTokenSigningAlgValues: [],
   requestObjectEncryptionAlgValues: [],
@@ -1404,7 +1433,8 @@ default value:
   revocationEndpointAuthSigningAlgValues: [],
   userinfoEncryptionAlgValues: [],
   userinfoEncryptionEncValues: [],
-  userinfoSigningAlgValues: [] }
+  userinfoSigningAlgValues: []
+}
 ```
 <!-- END CONF OPTIONS -->
 

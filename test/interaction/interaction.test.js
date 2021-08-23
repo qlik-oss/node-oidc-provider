@@ -2,7 +2,7 @@
 
 const uuid = require('uuid/v4');
 const bootstrap = require('../test_helper');
-const config = require('./interaction.config.js');
+const config = require('./interaction.config');
 const KeyGrip = require('keygrip'); // eslint-disable-line import/no-extraneous-dependencies
 
 const expire = new Date();
